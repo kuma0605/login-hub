@@ -2,8 +2,10 @@
 import { ref } from 'vue';
 import { DeviceMeshBackground } from './components';
 import MeshlineBackground from './components/MeshlineBackground.vue';
+import CircuitField from './components/CircuitField.vue';
 import IotMeshLogin from './views/IotMeshLogin.vue';
 import MeshlineLogin from './views/MeshlineLogin.vue';
+import NodegridLogin from './views/NodegridLogin.vue';
 import { showcaseThemes } from '@login-hub/shared-data';
 
 const themeId = ref<string>('iot-mesh');
@@ -20,16 +22,14 @@ const themeId = ref<string>('iot-mesh');
     <MeshlineBackground
       v-else-if="themeId === 'meshline-iot'"
     />
-    <div
-      v-else
-      class="fixed inset-0 bg-base flex items-center justify-center text-muted text-sm font-mono"
-    >
-      <span>{{ showcaseThemes.find((t) => t.id === themeId)?.name }} • 即将推出</span>
-    </div>
+    <CircuitField
+      v-else-if="themeId === 'nodegrid-neon'"
+    />
 
     <!-- Main Login Screens -->
     <IotMeshLogin v-if="themeId === 'iot-mesh'" />
     <MeshlineLogin v-else-if="themeId === 'meshline-iot'" />
+    <NodegridLogin v-else-if="themeId === 'nodegrid-neon'" />
 
     <!-- Extreme Minimalist Dots (纯净点点点) -->
     <div class="fixed bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none">

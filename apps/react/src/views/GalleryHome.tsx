@@ -8,10 +8,7 @@ import {
   ArrowRight,
   RadioTower,
   CheckCircle2,
-  Clock,
-  Terminal,
-  Orbit,
-  Palette
+  Clock
 } from 'lucide-react';
 import {
   showcaseThemes,
@@ -157,20 +154,50 @@ export const GalleryHome: React.FC = () => {
                         <span>18 Nodes</span>
                       </div>
                     </div>
-                  ) : theme.id === 'cyberpunk-neon' ? (
-                    <div className="flex flex-col items-center justify-center gap-2 text-rose-500">
-                      <Terminal className="w-8 h-8 opacity-70 group-hover:scale-110 transition-transform" />
-                      <span className="text-xs font-mono tracking-widest uppercase">NeoMatrix Cyberpunk</span>
-                    </div>
-                  ) : theme.id === 'particles-3d' ? (
-                    <div className="flex flex-col items-center justify-center gap-2 text-indigo-400">
-                      <Orbit className="w-8 h-8 opacity-70 group-hover:scale-110 transition-transform" />
-                      <span className="text-xs font-mono tracking-widest uppercase">Celestial 3D Particles</span>
+                  ) : theme.id === 'meshline-iot' ? (
+                    <div className="relative w-full h-full p-4 flex flex-col justify-between bg-[#eef3f8]">
+                      <div className="flex items-center justify-between z-10">
+                        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-blue-500/15 border border-blue-500/30 text-[10px] text-blue-600 font-mono font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" />
+                          <span>BLUEPRINT GRID</span>
+                        </div>
+                        <span className="text-[10px] font-mono text-slate-500">SVG RADAR</span>
+                      </div>
+                      <div className="absolute inset-0 opacity-60 flex items-center justify-center pointer-events-none">
+                        <svg className="w-full h-full" viewBox="0 0 160 100">
+                          <circle cx="80" cy="50" r="28" fill="none" stroke="#0b5cff" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.6" />
+                          <circle cx="80" cy="50" r="14" fill="none" stroke="#0b5cff" strokeWidth="0.8" opacity="0.8" />
+                          <circle cx="80" cy="50" r="3" fill="#0b5cff" />
+                          <circle cx="45" cy="35" r="2" fill="#0b5cff" />
+                          <circle cx="115" cy="65" r="2" fill="#0b5cff" />
+                        </svg>
+                      </div>
+                      <div className="z-10 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                        <span>Hanover-3</span>
+                        <span>12,486 MESH</span>
+                      </div>
                     </div>
                   ) : (
-                    <div className="flex flex-col items-center justify-center gap-2 text-sky-400">
-                      <Palette className="w-8 h-8 opacity-70 group-hover:scale-110 transition-transform" />
-                      <span className="text-xs font-mono tracking-widest uppercase">Minimal Frosted Aura</span>
+                    <div className="relative w-full h-full p-4 flex flex-col justify-between bg-[#12304a]">
+                      <div className="flex items-center justify-between z-10">
+                        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-[10px] text-cyan-300 font-mono font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                          <span>CIRCUIT FIELD</span>
+                        </div>
+                        <span className="text-[10px] font-mono text-cyan-200/60">CANVAS 90°</span>
+                      </div>
+                      <div className="absolute inset-0 opacity-70 flex items-center justify-center pointer-events-none">
+                        <svg className="w-full h-full" viewBox="0 0 160 100">
+                          <path d="M 20,50 L 60,50 L 60,25 L 110,25 L 110,75 L 140,75" fill="none" stroke="#67e8f9" strokeWidth="1.2" strokeLinecap="round" />
+                          <circle cx="140" cy="75" r="3" fill="#a5f3fc" />
+                          <circle cx="60" cy="50" r="2" fill="#67e8f9" />
+                          <circle cx="110" cy="25" r="2" fill="#67e8f9" />
+                        </svg>
+                      </div>
+                      <div className="z-10 flex items-center justify-between text-[11px] text-cyan-200/70 font-mono">
+                        <span>4 Gateways</span>
+                        <span>8,048 Devices</span>
+                      </div>
                     </div>
                   )}
                 </div>

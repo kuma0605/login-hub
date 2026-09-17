@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { DeviceMeshBackground } from './components/DeviceMeshBackground';
 import { MeshlineBackground } from './components/MeshlineBackground';
+import { CircuitField } from './components/CircuitField';
 import { IotMeshLogin } from './views/IotMeshLogin';
 import { MeshlineLogin } from './views/MeshlineLogin';
+import { NodegridLogin } from './views/NodegridLogin';
 import { showcaseThemes } from '@login-hub/shared-data';
 
 export function App() {
@@ -16,14 +18,13 @@ export function App() {
       ) : themeId === 'meshline-iot' ? (
         <MeshlineBackground />
       ) : (
-        <div className="fixed inset-0 bg-base flex items-center justify-center text-muted text-sm font-mono">
-          <span>{showcaseThemes.find((t) => t.id === themeId)?.name} • 即将推出</span>
-        </div>
+        <CircuitField density={1} />
       )}
 
       {/* Main Login Screens */}
       {themeId === 'iot-mesh' && <IotMeshLogin />}
       {themeId === 'meshline-iot' && <MeshlineLogin />}
+      {themeId === 'nodegrid-neon' && <NodegridLogin />}
 
       {/* Extreme Minimalist Dots (纯净点点点) */}
       <div className="fixed bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none">
