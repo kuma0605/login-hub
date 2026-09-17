@@ -33,6 +33,24 @@ export const showcaseThemes: ShowcaseTheme[] = [
     colors: iotMeshTokens
   },
   {
+    id: 'meshline-iot',
+    name: 'Meshline IoT Console',
+    category: 'IoT 蓝图科技',
+    description: '浅色工业蓝图网格、居中登录卡片、雷达脉冲光环、垂直扫描线与四角遥测浮动面板。',
+    status: 'active',
+    tags: ['Light Tech Grid', 'Radar Wave', 'Floating Telemetry', 'Scanline'],
+    frameworks: ['react', 'vue'],
+    colors: {
+      base: '#eef3f8',
+      surface: '#ffffff',
+      line: '#d7e1ec',
+      signal: '#0b5cff',
+      signalDim: '#e4edff',
+      ink: '#0a1526',
+      muted: '#5b6d80'
+    }
+  },
+  {
     id: 'cyberpunk-neon',
     name: 'NeoMatrix Cyberpunk',
     category: '赛博霓虹',

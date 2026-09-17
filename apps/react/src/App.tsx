@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { DeviceMeshBackground } from './components/DeviceMeshBackground';
+import { MeshlineBackground } from './components/MeshlineBackground';
 import { IotMeshLogin } from './views/IotMeshLogin';
+import { MeshlineLogin } from './views/MeshlineLogin';
 import { showcaseThemes } from '@login-hub/shared-data';
 
 export function App() {
@@ -8,17 +10,20 @@ export function App() {
 
   return (
     <div className="relative min-h-screen w-full bg-base text-ink overflow-x-hidden flex flex-col justify-center selection:bg-signal selection:text-base">
-      {/* Dynamic Background */}
+      {/* Dynamic Backgrounds */}
       {themeId === 'iot-mesh' ? (
         <DeviceMeshBackground density="standard" animate={true} />
+      ) : themeId === 'meshline-iot' ? (
+        <MeshlineBackground />
       ) : (
         <div className="fixed inset-0 bg-base flex items-center justify-center text-muted text-sm font-mono">
           <span>{showcaseThemes.find((t) => t.id === themeId)?.name} • 即将推出</span>
         </div>
       )}
 
-      {/* Main Login Screen */}
+      {/* Main Login Screens */}
       {themeId === 'iot-mesh' && <IotMeshLogin />}
+      {themeId === 'meshline-iot' && <MeshlineLogin />}
 
       {/* Extreme Minimalist Dots (纯净点点点) */}
       <div className="fixed bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none">

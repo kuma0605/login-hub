@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { DeviceMeshBackground } from './components';
+import MeshlineBackground from './components/MeshlineBackground.vue';
 import IotMeshLogin from './views/IotMeshLogin.vue';
+import MeshlineLogin from './views/MeshlineLogin.vue';
 import { showcaseThemes } from '@login-hub/shared-data';
 
 const themeId = ref<string>('iot-mesh');
@@ -9,11 +11,14 @@ const themeId = ref<string>('iot-mesh');
 
 <template>
   <div class="relative min-h-screen w-full bg-base text-ink overflow-x-hidden flex flex-col justify-center selection:bg-signal selection:text-base">
-    <!-- Dynamic Background -->
+    <!-- Dynamic Backgrounds -->
     <DeviceMeshBackground
       v-if="themeId === 'iot-mesh'"
       density="standard"
       :animate="true"
+    />
+    <MeshlineBackground
+      v-else-if="themeId === 'meshline-iot'"
     />
     <div
       v-else
@@ -22,8 +27,9 @@ const themeId = ref<string>('iot-mesh');
       <span>{{ showcaseThemes.find((t) => t.id === themeId)?.name }} • 即将推出</span>
     </div>
 
-    <!-- Main Login Screen -->
+    <!-- Main Login Screens -->
     <IotMeshLogin v-if="themeId === 'iot-mesh'" />
+    <MeshlineLogin v-else-if="themeId === 'meshline-iot'" />
 
     <!-- Extreme Minimalist Dots (纯净点点点) -->
     <div class="fixed bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none">
