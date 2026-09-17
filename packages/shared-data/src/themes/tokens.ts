@@ -7,6 +7,10 @@ export interface ShowcaseTheme {
   tags: string[];
   frameworks: ('react' | 'vue')[];
   colors: Record<string, string>;
+  components: {
+    background: string;
+    login: string;
+  };
 }
 
 export const iotMeshTokens = {
@@ -30,7 +34,11 @@ export const showcaseThemes: ShowcaseTheme[] = [
     status: 'active',
     tags: ['SVG Topology', 'Data Flow', 'Glassmorphism', 'Reduced Motion'],
     frameworks: ['react', 'vue'],
-    colors: iotMeshTokens
+    colors: iotMeshTokens,
+    components: {
+      background: 'DeviceMeshBackground',
+      login: 'IotMeshLogin'
+    }
   },
   {
     id: 'meshline-iot',
@@ -48,6 +56,10 @@ export const showcaseThemes: ShowcaseTheme[] = [
       signalDim: '#e4edff',
       ink: '#0a1526',
       muted: '#5b6d80'
+    },
+    components: {
+      background: 'MeshlineBackground',
+      login: 'MeshlineLogin'
     }
   },
   {
@@ -66,6 +78,10 @@ export const showcaseThemes: ShowcaseTheme[] = [
       signalDim: '#1a4160',
       ink: '#e8f7ff',
       muted: '#a9cadd'
+    },
+    components: {
+      background: 'CircuitField',
+      login: 'NodegridLogin'
     }
   }
 ];
