@@ -1,0 +1,16 @@
+{
+  "name": "login-hub",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Curated collection of high-aesthetic login interfaces and animated backgrounds in React and Vue",
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"./apps/*\" dev",
+    "dev:react": "pnpm --filter @login-hub/react dev",
+    "dev:vue": "pnpm --filter @login-hub/vue dev",
+    "build": "pnpm --filter \"./packages/*\" --filter \"./apps/*\" build",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
