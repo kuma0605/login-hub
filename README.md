@@ -49,28 +49,63 @@ pnpm typecheck
 
 ---
 
-## ✨ 首发主题：Meridian Fleet Console (IoT 网格拓扑)
+## ✨ 已收录主题概览
 
-- **设计规范**：
-  - 底色 `base`: `#060a11`
-  - 卡片 `surface`: `#0b1220`，边框 `line`: `#1d2b3f`
-  - 核心高光色 `signal`: `#3ae0c6`（青绿色），次级色 `signal-dim`: `#1a6f66`
-- **动效亮点**：
-  - 响应式自适应 SVG 拓扑网络（160 × 100 虚拟视口，自动裁剪铺满屏幕）
-  - 3 级节点架构（1 个 Hub 枢纽、4 个 Gateway 网关、13 个边缘传感器）
-  - 真实遥测数据流包（Packets）沿拓扑链路动态穿梭
-  - Hub 与 Gateway 周期性雷达脉冲扩散波纹
-  - 支持网格密度调节（Sparse / Standard / Dense）与动画启闭
-- **安全与控制台**：
-  - 4 维实时设备拓扑监控微件
-  - 暗色毛玻璃认证表单、密码切换、企业级 SSO (SAML/Okta, Azure AD) 与合规徽标
+全站采用极简沉浸式全屏展示，通过**底部微光小圆点（●）**一键平滑切换，页面**右上角**提供可复用组件名称与**一键复制代码**支持：
+
+| 序号 | 主题名称 | 风格分类 | 核心动效与微交互 | 背景组件 | 界面组件 |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **01** | **Meridian Fleet Console** | 暗黑赛博拓扑 | • 全局深海科技蓝微晶格背景<br>• 双区对称高光星云照亮<br>• 响应式自适应 SVG 拓扑与数据包穿梭<br>• 纯净冷感冰蓝脉冲环 | `<DeviceMeshBackground />` | `<IotMeshLogin />` |
+| **02** | **Meshline IoT Console** | 浅色工业蓝图 | • 浅色精密蓝图网格 (`.grid-field`)<br>• 居中多层雷达光环脉冲<br>• 工业取景器直角框修饰<br>• 纵向全息扫描流光 (`.scan-line`) | `<MeshlineBackground />` | `<MeshlineLogin />` |
+| **03** | **Nodegrid Neon Portal** | 霓虹电路控制台 | • Canvas 晶体管电路网络<br>• 90° 智能转弯流光电流脉冲<br>• 实时遥测 Sparkline 动态折线图 (msg/s)<br>• 四大分布式网关动态状态监测 | `<CircuitField />` | `<NodegridLogin />` |
+
+---
+
+## 🧩 如何复用组件？
+
+每个主题由**独立的背景动效组件**和**前端登录卡片组件**解耦构成，互不干扰，开箱即用：
+
+1. **直接查看与复制**：
+   在运行页面右上角悬浮栏中，点击对应的 `【背景】` 或 `【界面】` 按钮，即可将组件 JSX / Vue 标签直接复制到剪贴板。
+2. **源码对应位置**：
+   - **React**：背景位于 `apps/react/src/components/`，界面位于 `apps/react/src/views/`
+   - **Vue 3**：背景位于 `apps/vue/src/components/`，界面位于 `apps/vue/src/views/`
+   - **数据源**：拓扑节点、数据链路与网关状态统一来自 `@login-hub/shared-data`
 
 ---
 
 ## 🎨 如何扩展新增一套登录页？
 
 1. **注册主题元数据**：
-   在 `packages/shared-data/src/themes/tokens.ts` 中的 `showcaseThemes` 注册新风格（如 `cyberpunk`、`3d-particles`、`glassmorphism`）。
-2. **编写专属背景或视图**：
-   - React：在 `apps/react/src/views/` 下新建对应视图，并在 `App.tsx` 中按 `themeId` 挂载。
-   - Vue：在 `apps/vue/src/views/` 下新建对应 `.vue` 组件，并在 `App.vue` 中挂载。
+   在 `packages/shared-data/src/themes/tokens.ts` 中的 `showcaseThemes` 注册新主题：
+   ```ts
+   {
+     id: 'your-theme',
+     name: 'Your Theme Name',
+     category: '风格分类',
+     description: '主题描述...',
+     status: 'active',
+     tags: ['Tag1', 'Tag2'],
+     frameworks: ['react', 'vue'],
+     colors: { ... },
+     components: {
+       background: 'YourBackgroundComponent',
+       login: 'YourLoginComponent'
+     }
+   }
+   ```
+2. **编写背景与界面**：
+   - React：在 `apps/react/` 下分别实现背景与视图，并在 `App.tsx` 中按 `themeId` 挂载。
+   - Vue 3：在 `apps/vue/` 下分别实现背景与视图，并在 `App.vue` 中按 `themeId` 挂载。
+
+---
+
+## 📡 Git 远程仓库配置
+
+本项目当前配置了两个远程同步仓库：
+
+| 远程别名 | 仓库地址 | 说明 |
+| :--- | :--- | :--- |
+| `origin` | `git@github.com:kuma0605/login-hub.git` | GitHub 远程主库 |
+| `htit` | `http://58.221.22.166:10038/htit/login-hub.git` | 内部私有 Git 仓库 |
+
