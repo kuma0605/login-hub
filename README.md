@@ -60,6 +60,7 @@ pnpm typecheck
 | **01** | **Meridian Fleet Console** | 暗黑赛博拓扑 | • 全局深海科技蓝微晶格背景<br>• 双区对称高光星云照亮<br>• 响应式自适应 SVG 拓扑与数据包穿梭<br>• 纯净冷感冰蓝脉冲环 | `<DeviceMeshBackground />` | `<IotMeshLogin />` |
 | **02** | **Meshline IoT Console** | 浅色工业蓝图 | • 浅色精密蓝图网格 (`.grid-field`)<br>• 居中多层雷达光环脉冲<br>• 工业取景器直角框修饰<br>• 纵向全息扫描流光 (`.scan-line`) | `<MeshlineBackground />` | `<MeshlineLogin />` |
 | **03** | **Nodegrid Neon Portal** | 霓虹电路控制台 | • Canvas 晶体管电路网络<br>• 90° 智能转弯流光电流脉冲<br>• 实时遥测 Sparkline 动态折线图 (msg/s)<br>• 四大分布式网关动态状态监测 | `<CircuitField />` | `<NodegridLogin />` |
+| **04** | **Smart Security Network** | 智能安防边缘网络 | • 蓝紫星云呼吸扩散 (`animate-bloom`)<br>• 双向 X/Y 信号流光穿梭飞线<br>• 对角 45° 掠日动态高光扫掠<br>• 4 类边缘感知设备状态与 3D 等距网络 | `<SmartSecurityBackground />` | `<SmartSecurityLogin />` |
 
 ---
 

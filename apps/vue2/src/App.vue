@@ -12,11 +12,15 @@
     <CircuitField
       v-else-if="themeId === 'nodegrid-neon'"
     />
+    <SmartSecurityBackground
+      v-else-if="themeId === 'smart-security'"
+    />
 
     <!-- Main Login Screens -->
     <IotMeshLogin v-if="themeId === 'iot-mesh'" />
     <MeshlineLogin v-else-if="themeId === 'meshline-iot'" />
     <NodegridLogin v-else-if="themeId === 'nodegrid-neon'" />
+    <SmartSecurityLogin v-else-if="themeId === 'smart-security'" />
 
     <!-- Reusable Component Names & One-Click Copy Badge -->
     <aside class="fixed top-5 right-5 z-50 flex items-center" aria-label="组件代码复制">
@@ -78,10 +82,11 @@
 
 <script>
 import { Copy, Check } from 'lucide-vue';
-import { DeviceMeshBackground, MeshlineBackground, CircuitField } from './components';
+import { DeviceMeshBackground, MeshlineBackground, CircuitField, SmartSecurityBackground } from './components';
 import IotMeshLogin from './views/IotMeshLogin.vue';
 import MeshlineLogin from './views/MeshlineLogin.vue';
 import NodegridLogin from './views/NodegridLogin.vue';
+import SmartSecurityLogin from './views/SmartSecurityLogin.vue';
 import { showcaseThemes } from '@login-hub/shared-data';
 
 export default {
@@ -90,9 +95,11 @@ export default {
     DeviceMeshBackground,
     MeshlineBackground,
     CircuitField,
+    SmartSecurityBackground,
     IotMeshLogin,
     MeshlineLogin,
     NodegridLogin,
+    SmartSecurityLogin,
     Copy,
     Check
   },

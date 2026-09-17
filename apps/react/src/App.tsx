@@ -3,9 +3,11 @@ import { Copy, Check } from 'lucide-react';
 import { DeviceMeshBackground } from './components/DeviceMeshBackground';
 import { MeshlineBackground } from './components/MeshlineBackground';
 import { CircuitField } from './components/CircuitField';
+import { SmartSecurityBackground } from './components/SmartSecurityBackground';
 import { IotMeshLogin } from './views/IotMeshLogin';
 import { MeshlineLogin } from './views/MeshlineLogin';
 import { NodegridLogin } from './views/NodegridLogin';
+import { SmartSecurityLogin } from './views/SmartSecurityLogin';
 import { showcaseThemes } from '@login-hub/shared-data';
 
 export function App() {
@@ -27,14 +29,17 @@ export function App() {
         <DeviceMeshBackground density="standard" animate={true} />
       ) : themeId === 'meshline-iot' ? (
         <MeshlineBackground />
-      ) : (
+      ) : themeId === 'nodegrid-neon' ? (
         <CircuitField density={1} />
+      ) : (
+        <SmartSecurityBackground />
       )}
 
       {/* Main Login Screens */}
       {themeId === 'iot-mesh' && <IotMeshLogin />}
       {themeId === 'meshline-iot' && <MeshlineLogin />}
       {themeId === 'nodegrid-neon' && <NodegridLogin />}
+      {themeId === 'smart-security' && <SmartSecurityLogin />}
 
       {/* Reusable Component Names & One-Click Copy Badge */}
       <aside className="fixed top-5 right-5 z-50 flex items-center" aria-label="组件代码复制">

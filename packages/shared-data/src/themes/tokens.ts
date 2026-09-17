@@ -83,6 +83,62 @@ export const showcaseThemes: ShowcaseTheme[] = [
       background: 'CircuitField',
       login: 'NodegridLogin'
     }
+  },
+  {
+    id: 'smart-security',
+    name: 'Smart Security Network',
+    category: '智能安防感知网络',
+    description: '边缘算力 · 设备直连。呼吸蓝紫星云、双向光轨穿梭、节点星芒闪烁与对角流动光泽。',
+    status: 'active',
+    tags: ['Edge AI', 'Signal Traces', 'Light Sheen', 'Perimeter Security'],
+    frameworks: ['react', 'vue'],
+    colors: {
+      base: '#eff2fb',
+      surface: '#ffffff',
+      line: '#dde3f5',
+      signal: '#4f6ae8',
+      signalDim: '#dce4ff',
+      ink: '#151b38',
+      muted: '#646d99'
+    },
+    components: {
+      background: 'SmartSecurityBackground',
+      login: 'SmartSecurityLogin'
+    }
+  }
+];
+
+export interface SecurityCapability {
+  id: string;
+  title: string;
+  device: string;
+  description: string;
+}
+
+export const securityCapabilities: SecurityCapability[] = [
+  {
+    id: 'vision',
+    title: '视频感知',
+    device: '枪机 / 球机',
+    description: '接入现有摄像机，画面在边缘侧结构化，不回传原始视频流。'
+  },
+  {
+    id: 'access',
+    title: '通道管控',
+    device: '道闸 / 立柱',
+    description: '识别结果直接驱动抬杆与放行，从判定到执行控制在 300 毫秒内。'
+  },
+  {
+    id: 'compute',
+    title: '边缘算力',
+    device: '一体化主机',
+    description: '单台主机承载 16 路推理，断网期间本地判定并在恢复后补传。'
+  },
+  {
+    id: 'ops',
+    title: '设备运维',
+    device: '统一控制台',
+    description: '离线、遮挡、掉线设备自动告警，现场无需逐台人工排查。'
   }
 ];
 
@@ -90,7 +146,8 @@ export const showcaseCategories = [
   '全部风格',
   'IoT 拓扑网络',
   'IoT 蓝图科技',
-  'IoT 霓虹电路'
+  'IoT 霓虹电路',
+  '智能安防感知网络'
 ] as const;
 
 export type ShowcaseCategory = typeof showcaseCategories[number];
