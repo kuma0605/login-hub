@@ -77,20 +77,25 @@ export function App() {
 
       {/* Extreme Minimalist Dots (纯净点点点) */}
       <div className="fixed bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none">
-        <div className="glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 pointer-events-auto shadow-xl shadow-black/60 border border-line/70">
-          {showcaseThemes.map((theme) => {
+        <div className="glass-pill px-2.5 py-1 rounded-full flex items-center gap-1 pointer-events-auto shadow-xl shadow-black/60 border border-line/70">
+          {showcaseThemes.map((theme, index) => {
             const isActive = theme.id === themeId;
             return (
               <button
                 key={theme.id}
+                id={`theme-dot-${index + 1}`}
                 onClick={() => setThemeId(theme.id)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  isActive
-                    ? 'w-6 bg-signal shadow-[0_0_8px_#3ae0c6]'
-                    : 'w-2 bg-line hover:bg-muted'
-                }`}
+                className="p-1.5 rounded-full transition-all cursor-pointer flex items-center justify-center focus:outline-none"
                 title={theme.name}
-              />
+              >
+                <span
+                  className={`h-2 rounded-full transition-all duration-300 block pointer-events-none ${
+                    isActive
+                      ? 'w-6 bg-signal shadow-[0_0_8px_#3ae0c6]'
+                      : 'w-2 bg-line hover:bg-muted'
+                  }`}
+                />
+              </button>
             );
           })}
         </div>

@@ -2,7 +2,7 @@
 
 > 高质量登录界面与动效背景精选合集（Showcase Monorepo）
 > 
-> 同时收录 **React** 与 **Vue 3** 两大生态的高水准动态登录模板，基于 `pnpm workspace` 统一管理与跨包复用。
+> 同时收录 **React**、**Vue 3** 以及 **Vue 2 (2.6.11 兼容)** 三大生态的高水准动态登录模板，基于 `pnpm workspace` 统一管理与跨包复用。
 
 ---
 
@@ -12,7 +12,8 @@
 login-hub/
 ├── apps/
 │   ├── react/                  # React 登录画廊 (Vite + React 18 + TS + Tailwind + Framer Motion)
-│   └── vue/                    # Vue 3 登录画廊 (Vite + Vue 3 + TS + Tailwind + SVG 动画)
+│   ├── vue/                    # Vue 3 登录画廊 (Vite + Vue 3 + TS + Tailwind + SVG 动画)
+│   └── vue2/                   # Vue 2 登录画廊 (Vite + Vue 2.7/2.6.11 Options API + lucide-vue)
 ├── packages/
 │   └── shared-data/            # 纯 TS 共享模块：拓扑节点数据、图算法、主题 Tokens、画廊清单
 ├── pnpm-workspace.yaml         # Monorepo 工作区定义
@@ -34,9 +35,10 @@ pnpm install
 
 | 命令 | 说明 | 预览地址 |
 | :--- | :--- | :--- |
-| `pnpm dev` | **同时并行启动** React 与 Vue 画廊 | React: 5175 / Vue: 5174 |
+| `pnpm dev` | **同时并行启动** React、Vue 3 与 Vue 2 画廊 | 5175 / 5174 / 5176 |
 | `pnpm dev:react` | 仅启动 React 版登录画廊 | [http://localhost:5175](http://localhost:5175) |
 | `pnpm dev:vue` | 仅启动 Vue 3 版登录画廊 | [http://localhost:5174](http://localhost:5174) |
+| `pnpm dev:vue2` | 仅启动 Vue 2 版登录画廊（兼容 2.6.11） | [http://localhost:5176](http://localhost:5176) |
 
 ### 3. 项目构建与类型检查
 ```bash
@@ -70,7 +72,14 @@ pnpm typecheck
 2. **源码对应位置**：
    - **React**：背景位于 `apps/react/src/components/`，界面位于 `apps/react/src/views/`
    - **Vue 3**：背景位于 `apps/vue/src/components/`，界面位于 `apps/vue/src/views/`
+   - **Vue 2 (2.6.11 兼容)**：背景位于 `apps/vue2/src/components/`，界面位于 `apps/vue2/src/views/`
    - **数据源**：拓扑节点、数据链路与网关状态统一来自 `@login-hub/shared-data`
+
+3. **如何在 Vue 2.6.11 项目中 0 改动直接复制？**：
+   - 直接拷贝 `apps/vue2/src/components/` 与 `apps/vue2/src/views/` 下对应的 `.vue` 组件文件到你的业务工程。
+   - 所有 Vue 2 组件均严格采用 **Vue 2 Options API**（单根节点 `<template>`、`data()`、`methods`、`mounted()`、`beforeDestroy()`）。
+   - 图标依赖安装：`npm install lucide-vue`（Vue 2 版本），或者直接替换为项目现有的 svg/iconfont 图标。
+   - 动画样式：拷贝 `apps/vue2/src/index.css` 中的 HUD 与微动画样式到全局样式表。
 
 ---
 

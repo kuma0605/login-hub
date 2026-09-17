@@ -1,30 +1,3 @@
-<script setup lang="ts">
-import { ref, computed } from 'vue';
-import { Copy, Check } from 'lucide-vue-next';
-import { DeviceMeshBackground } from './components';
-import MeshlineBackground from './components/MeshlineBackground.vue';
-import CircuitField from './components/CircuitField.vue';
-import IotMeshLogin from './views/IotMeshLogin.vue';
-import MeshlineLogin from './views/MeshlineLogin.vue';
-import NodegridLogin from './views/NodegridLogin.vue';
-import { showcaseThemes } from '@login-hub/shared-data';
-
-const themeId = ref<string>('iot-mesh');
-const copiedKey = ref<string | null>(null);
-
-const currentTheme = computed(
-  () => showcaseThemes.find((t) => t.id === themeId.value) || showcaseThemes[0]
-);
-
-const copySnippet = (code: string, key: string) => {
-  navigator.clipboard.writeText(code);
-  copiedKey.value = key;
-  setTimeout(() => {
-    copiedKey.value = null;
-  }, 2000);
-};
-</script>
-
 <template>
   <div class="relative min-h-screen w-full bg-base text-ink overflow-x-hidden flex flex-col justify-center selection:bg-signal selection:text-base">
     <!-- Dynamic Backgrounds -->
@@ -102,3 +75,49 @@ const copySnippet = (code: string, key: string) => {
     </div>
   </div>
 </template>
+
+<script>
+import { Copy, Check } from 'lucide-vue';
+import { DeviceMeshBackground, MeshlineBackground, CircuitField } from './components';
+import IotMeshLogin from './views/IotMeshLogin.vue';
+import MeshlineLogin from './views/MeshlineLogin.vue';
+import NodegridLogin from './views/NodegridLogin.vue';
+import { showcaseThemes } from '@login-hub/shared-data';
+
+export default {
+  name: 'App',
+  components: {
+    DeviceMeshBackground,
+    MeshlineBackground,
+    CircuitField,
+    IotMeshLogin,
+    MeshlineLogin,
+    NodegridLogin,
+    Copy,
+    Check
+  },
+  data() {
+    return {
+      themeId: 'iot-mesh',
+      copiedKey: null,
+      showcaseThemes
+    };
+  },
+  computed: {
+    currentTheme() {
+      return this.showcaseThemes.find((t) => t.id === this.themeId) || this.showcaseThemes[0];
+    }
+  },
+  methods: {
+    copySnippet(code, key) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code);
+      }
+      this.copiedKey = key;
+      setTimeout(() => {
+        this.copiedKey = null;
+      }, 2000);
+    }
+  }
+};
+</script>

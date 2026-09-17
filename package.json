@@ -7,6 +7,7 @@
     "dev": "pnpm --parallel --filter \"./apps/*\" dev",
     "dev:react": "pnpm --filter @login-hub/react dev",
     "dev:vue": "pnpm --filter @login-hub/vue dev",
+    "dev:vue2": "pnpm --filter @login-hub/vue2 dev",
     "build": "pnpm --filter \"./packages/*\" --filter \"./apps/*\" build",
     "typecheck": "pnpm -r typecheck"
   },

@@ -1,55 +1,6 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import {
-  Hexagon,
-  Eye,
-  EyeOff,
-  AlertCircle,
-  Loader2,
-  Check,
-  KeyRound,
-  ShieldCheck
-} from 'lucide-vue-next';
-
-type Status = 'idle' | 'submitting' | 'success';
-
-const email = ref('operator@hanover-mesh.net');
-const password = ref('mesh•node•pass');
-const showPassword = ref(false);
-const remember = ref(true);
-const status = ref<Status>('idle');
-const error = ref<string | null>(null);
-
-const handleSubmit = () => {
-  if (status.value === 'submitting') return;
-
-  if (!email.value.trim() || !password.value) {
-    error.value = 'Enter your work email and password to continue.';
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-    error.value = 'That email address looks incomplete.';
-    return;
-  }
-  if (password.value.length < 6) {
-    error.value = 'Password must be at least 6 characters.';
-    return;
-  }
-
-  error.value = null;
-  status.value = 'submitting';
-  setTimeout(() => {
-    status.value = 'success';
-  }, 1200);
-};
-
-const fieldClass =
-  'w-full rounded-lg border border-[#d7e1ec] bg-white px-3.5 py-2.5 font-mono text-sm text-[#0a1526] placeholder:text-[#5b6d80]/70 outline-none transition-all duration-150 focus:border-[#0b5cff] focus:ring-2 focus:ring-[#0b5cff]/20';
-</script>
-
 <template>
   <section class="relative z-10 flex w-full min-h-screen items-center justify-center px-4 py-12">
-    <div className="relative w-full max-w-[26rem] rounded-2xl border border-white/80 bg-white/90 p-8 shadow-[0_20px_50px_rgba(10,21,38,0.1)] backdrop-blur-xl sm:p-10">
+    <div class="relative w-full max-w-[26rem] rounded-2xl border border-white/80 bg-white/90 p-8 shadow-[0_20px_50px_rgba(10,21,38,0.1)] backdrop-blur-xl sm:p-10">
       <!-- Corner blueprint accents -->
       <span
         class="absolute -left-px -top-px h-6 w-6 rounded-tl-2xl border-l-2 border-t-2 border-[#0b5cff]"
@@ -115,7 +66,7 @@ const fieldClass =
               v-model="password"
               placeholder="••••••••"
               :aria-invalid="Boolean(error)"
-              :class="`${fieldClass} pr-11`"
+              :class="fieldClass + ' pr-11'"
             />
             <button
               type="button"
@@ -189,3 +140,66 @@ const fieldClass =
     </div>
   </section>
 </template>
+
+<script>
+import {
+  Hexagon,
+  Eye,
+  EyeOff,
+  AlertCircle,
+  Loader2,
+  Check,
+  KeyRound,
+  ShieldCheck
+} from 'lucide-vue';
+
+export default {
+  name: 'MeshlineLogin',
+  components: {
+    Hexagon,
+    Eye,
+    EyeOff,
+    AlertCircle,
+    Loader2,
+    Check,
+    KeyRound,
+    ShieldCheck
+  },
+  data() {
+    return {
+      email: 'operator@hanover-mesh.net',
+      password: 'mesh•node•pass',
+      showPassword: false,
+      remember: true,
+      status: 'idle',
+      error: null,
+      fieldClass:
+        'w-full rounded-lg border border-[#d7e1ec] bg-white px-3.5 py-2.5 font-mono text-sm text-[#0a1526] placeholder:text-[#5b6d80]/70 outline-none transition-all duration-150 focus:border-[#0b5cff] focus:ring-2 focus:ring-[#0b5cff]/20'
+    };
+  },
+  methods: {
+    handleSubmit() {
+      if (this.status === 'submitting') return;
+
+      if (!this.email.trim() || !this.password) {
+        this.error = 'Enter your work email and password to continue.';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email.trim())) {
+        this.error = 'That email address looks incomplete.';
+        return;
+      }
+      if (this.password.length < 6) {
+        this.error = 'Password must be at least 6 characters.';
+        return;
+      }
+
+      this.error = null;
+      this.status = 'submitting';
+      setTimeout(() => {
+        this.status = 'success';
+      }, 1200);
+    }
+  }
+};
+</script>
