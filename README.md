@@ -34,8 +34,8 @@ pnpm install
 
 | 命令 | 说明 | 预览地址 |
 | :--- | :--- | :--- |
-| `pnpm dev` | **同时并行启动** React 与 Vue 画廊 | React: 5173 / Vue: 5174 |
-| `pnpm dev:react` | 仅启动 React 版登录画廊 | [http://localhost:5173](http://localhost:5173) |
+| `pnpm dev` | **同时并行启动** React 与 Vue 画廊 | React: 5175 / Vue: 5174 |
+| `pnpm dev:react` | 仅启动 React 版登录画廊 | [http://localhost:5175](http://localhost:5175) |
 | `pnpm dev:vue` | 仅启动 Vue 3 版登录画廊 | [http://localhost:5174](http://localhost:5174) |
 
 ### 3. 项目构建与类型检查

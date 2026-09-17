@@ -78,3 +78,14 @@ export const showcaseThemes: ShowcaseTheme[] = [
     }
   }
 ];
+
+
+export const showcaseCategories = [
+  '全部风格',
+  'IoT 拓扑网络',
+  '赛博霓虹',
+  '3D 粒子流',
+  '极简毛玻璃'
+] as const;
+
+export type ShowcaseCategory = typeof showcaseCategories[number];
