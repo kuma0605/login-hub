@@ -29,24 +29,42 @@ export const DeviceMeshBackground: React.FC<DeviceMeshBackgroundProps> = ({
   const packets = meshPackets.filter(({ from, to }) => ids.has(from) && ids.has(to));
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-base pointer-events-none" aria-hidden="true">
+    <div
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+      style={{
+        backgroundColor: '#0f2438',
+        backgroundImage: `
+          radial-gradient(circle at 25% 45%, rgba(56, 189, 248, 0.28) 0%, transparent 55%),
+          radial-gradient(circle at 78% 45%, rgba(14, 165, 233, 0.28) 0%, transparent 55%),
+          linear-gradient(rgba(56, 189, 248, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(56, 189, 248, 0.07) 1px, transparent 1px)
+        `,
+        backgroundSize: '100% 100%, 100% 100%, 40px 40px, 40px 40px'
+      }}
+      aria-hidden="true"
+    >
       <svg
-        className="absolute inset-0 h-full w-full opacity-90"
+        className="absolute inset-0 h-full w-full opacity-95"
         viewBox="0 0 160 100"
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
-          {/* Subtle radial glow around the central hub */}
-          <radialGradient id="hubGlow" cx="52%" cy="48%" r="35%">
-            <stop offset="0%" stopColor="#3ae0c6" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#060a11" stopOpacity="0" />
+          {/* Dual ice cyan/sky glows: one for left hub, one for right side nodes */}
+          <radialGradient id="leftMeshGlow" cx="35%" cy="48%" r="45%">
+            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#0f2438" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="rightMeshGlow" cx="75%" cy="48%" r="45%">
+            <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#0f2438" stopOpacity="0" />
           </radialGradient>
         </defs>
 
-        <rect x="0" y="0" width="160" height="100" fill="url(#hubGlow)" />
+        <rect x="0" y="0" width="160" height="100" fill="url(#leftMeshGlow)" />
+        <rect x="0" y="0" width="160" height="100" fill="url(#rightMeshGlow)" />
 
-        {/* Network links */}
-        <g stroke="#1d2b3f" strokeWidth="0.18">
+        {/* Network links - pure luminous ice cyan */}
+        <g stroke="rgba(56, 189, 248, 0.55)" strokeWidth="0.38">
           {links.map(([aId, bId]) => {
             const a = byId.get(aId);
             const b = byId.get(bId);
@@ -58,13 +76,13 @@ export const DeviceMeshBackground: React.FC<DeviceMeshBackgroundProps> = ({
                 y1={a.y}
                 x2={b.x}
                 y2={b.y}
-                opacity="0.85"
+                opacity="0.95"
               />
             );
           })}
         </g>
 
-        {/* Flowing telemetry packet dots */}
+        {/* Flowing telemetry packet dots - pure crisp white-cyan, zero yellow */}
         {packets.map((packet, i) => {
           const a = byId.get(packet.from);
           const b = byId.get(packet.to);
@@ -73,15 +91,15 @@ export const DeviceMeshBackground: React.FC<DeviceMeshBackgroundProps> = ({
           return (
             <motion.circle
               key={`packet-${packet.from}-${packet.to}-${i}`}
-              r="0.5"
-              fill="#3ae0c6"
+              r="0.8"
+              fill="#e0f2fe"
               initial={{ cx: a.x, cy: a.y, opacity: 0 }}
               animate={
                 isAnimated
                   ? {
                       cx: [a.x, a.x, b.x, b.x],
                       cy: [a.y, a.y, b.y, b.y],
-                      opacity: [0, 0.95, 0.95, 0]
+                      opacity: [0, 1, 1, 0]
                     }
                   : { cx: a.x, cy: a.y, opacity: 0 }
               }
@@ -102,7 +120,6 @@ export const DeviceMeshBackground: React.FC<DeviceMeshBackgroundProps> = ({
           const r = nodeRadius[node.kind];
           const isHub = node.kind === 'hub';
           const isGateway = node.kind === 'gateway';
-          const stroke = nodeStrokeColor[node.kind];
 
           return (
             <g key={`node-${node.id}`}>
@@ -113,16 +130,16 @@ export const DeviceMeshBackground: React.FC<DeviceMeshBackgroundProps> = ({
                   cy={node.y}
                   r={r}
                   fill="none"
-                  stroke={isHub ? '#3ae0c6' : '#1a6f66'}
-                  strokeWidth={isHub ? '0.18' : '0.14'}
-                  initial={{ scale: 1, opacity: 0.5 }}
+                  stroke={isHub ? '#38bdf8' : '#60a5fa'}
+                  strokeWidth={isHub ? '0.3' : '0.22'}
+                  initial={{ scale: 1, opacity: 0.85 }}
                   animate={{
-                    scale: isHub ? 3.4 : 2.5,
+                    scale: isHub ? 3.6 : 2.6,
                     opacity: 0
                   }}
                   style={{ originX: `${node.x}px`, originY: `${node.y}px` }}
                   transition={{
-                    duration: isHub ? 3.6 : 4.4,
+                    duration: isHub ? 3.2 : 4.0,
                     ease: 'linear',
                     repeat: Infinity,
                     delay: node.id * 0.45
@@ -135,22 +152,19 @@ export const DeviceMeshBackground: React.FC<DeviceMeshBackgroundProps> = ({
                 cx={node.x}
                 cy={node.y}
                 r={r}
-                fill="#0b1220"
-                stroke={stroke}
-                strokeWidth={isHub ? 0.32 : isGateway ? 0.22 : 0.16}
+                fill="#163450"
+                stroke={isHub ? '#38bdf8' : isGateway ? '#60a5fa' : '#7dd3fc'}
+                strokeWidth={isHub ? 0.5 : isGateway ? 0.38 : 0.28}
               />
 
               {/* Inner core status dots */}
-              {isHub && <circle cx={node.x} cy={node.y} r={1.1} fill="#3ae0c6" />}
-              {isGateway && <circle cx={node.x} cy={node.y} r={0.55} fill="#1a6f66" />}
-              {node.kind === 'device' && <circle cx={node.x} cy={node.y} r={0.3} fill="#25384f" />}
+              {isHub && <circle cx={node.x} cy={node.y} r={1.2} fill="#38bdf8" />}
+              {isGateway && <circle cx={node.x} cy={node.y} r={0.7} fill="#60a5fa" />}
+              {node.kind === 'device' && <circle cx={node.x} cy={node.y} r={0.45} fill="#7dd3fc" opacity="0.9" />}
             </g>
           );
         })}
       </svg>
-
-      {/* Scrim: keeps the mesh readable as background and never competes with the foreground form */}
-      <div className="absolute inset-0 bg-base/70 backdrop-blur-[0.5px]" />
     </div>
   );
 };
