@@ -107,15 +107,3 @@ pnpm typecheck
 2. **编写背景与界面**：
    - React：在 `apps/react/` 下分别实现背景与视图，并在 `App.tsx` 中按 `themeId` 挂载。
    - Vue 3：在 `apps/vue/` 下分别实现背景与视图，并在 `App.vue` 中按 `themeId` 挂载。
-
----
-
-## 📡 Git 远程仓库配置
-
-本项目当前配置了两个远程同步仓库：
-
-| 远程别名 | 仓库地址 | 说明 |
-| :--- | :--- | :--- |
-| `origin` | `git@github.com:kuma0605/login-hub.git` | GitHub 远程主库 |
-| `htit` | `http://58.221.22.166:10038/htit/login-hub.git` | 内部私有 Git 仓库 |
-
