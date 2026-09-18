@@ -107,3 +107,17 @@ pnpm typecheck
 2. **编写背景与界面**：
    - React：在 `apps/react/` 下分别实现背景与视图，并在 `App.tsx` 中按 `themeId` 挂载。
    - Vue 3：在 `apps/vue/` 下分别实现背景与视图，并在 `App.vue` 中按 `themeId` 挂载。
+   - Vue 2 (2.6.11 兼容)：在 `apps/vue2/` 下分别实现背景与视图，并在 `App.vue` 中按 `themeId` 挂载。
+
+3. **在 `App.vue` 中挂载（以 Vue 2 为例）**：
+   ```vue
+   <!-- apps/vue2/src/App.vue -->
+   <YourBackground v-else-if="themeId === 'your-theme'" />
+   <YourLoginView v-else-if="themeId === 'your-theme'" />
+   ```
+
+4. **在 `tokens.ts` 的 `frameworks` 字段中声明适配生态**：
+   ```ts
+   frameworks: ['react', 'vue', 'vue2']
+   ```
+   - `'vue2'` 表示当前主题已在 `apps/vue2/` 下提供 Vue 2 兼容实现。
