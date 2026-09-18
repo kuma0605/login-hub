@@ -121,3 +121,18 @@ pnpm typecheck
    frameworks: ['react', 'vue', 'vue2']
    ```
    - `'vue2'` 表示当前主题已在 `apps/vue2/` 下提供 Vue 2 兼容实现。
+
+---
+
+## 📖 复制指南
+
+想将某个主题移植到自己的项目？查看详细复制文档：
+
+👉 **[docs/copy-guide.md](./docs/copy-guide.md)** — 总索引，含通用前提与依赖说明
+
+| 主题 | 文档 |
+| :--- | :--- |
+| Meridian Fleet Console | [docs/theme-iot-mesh.md](./docs/theme-iot-mesh.md) |
+| Meshline IoT Console | [docs/theme-meshline.md](./docs/theme-meshline.md) |
+| Nodegrid Neon Portal | [docs/theme-nodegrid.md](./docs/theme-nodegrid.md) |
+| Smart Security Network | [docs/theme-smart-security.md](./docs/theme-smart-security.md) |
