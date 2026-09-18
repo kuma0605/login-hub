@@ -8,6 +8,30 @@ import {
   meshlineStatusColor
 } from '@login-hub/shared-data';
 
+/** All grid/scan/radar CSS self-contained — no global index.css dependency */
+const STYLES = `
+  .ml-grid-field {
+    background-image:
+      linear-gradient(to right, rgba(11, 92, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 92, 255, 0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .ml-grid-field-lg {
+    background-image:
+      linear-gradient(to right, rgba(11, 92, 255, 0.13) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 92, 255, 0.13) 1px, transparent 1px);
+    background-size: 220px 220px;
+  }
+  .ml-scan-line {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(11, 92, 255, 0) 0%,
+      rgba(11, 92, 255, 0.5) 50%,
+      rgba(11, 92, 255, 0) 100%
+    );
+  }
+`;
+
 function nodeById(id: string) {
   return meshlineNodes.find((node) => node.id === id);
 }
@@ -17,9 +41,12 @@ export function MeshlineBackground() {
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden bg-[#eef3f8]" aria-hidden="true">
+      {/* Scoped styles — injected once */}
+      <style>{STYLES}</style>
+
       {/* Fine + Coarse Grid */}
-      <div className="grid-field absolute inset-0" />
-      <div className="grid-field-lg absolute inset-0" />
+      <div className="ml-grid-field absolute inset-0" />
+      <div className="ml-grid-field-lg absolute inset-0" />
 
       {/* Radar Rings anchored in the center */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
@@ -101,7 +128,6 @@ export function MeshlineBackground() {
                 transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity, delay: index * 0.35 }}
               />
             )}
-
             <span
               className="relative block rounded-full bg-white shadow-sm"
               style={{
@@ -110,7 +136,6 @@ export function MeshlineBackground() {
                 border: `${node.size === 'leaf' ? 1.5 : 2}px solid ${color}`
               }}
             />
-
             {node.size === 'hub' && (
               <>
                 <span
@@ -130,7 +155,7 @@ export function MeshlineBackground() {
       {/* Vertical Scan Sweep */}
       {!reduceMotion && (
         <motion.div
-          className="scan-line absolute inset-x-0 h-44 opacity-40"
+          className="ml-scan-line absolute inset-x-0 h-44 opacity-40"
           animate={{ y: ['-12%', '112%'] }}
           transition={{ duration: 11, ease: 'linear', repeat: Infinity }}
         />

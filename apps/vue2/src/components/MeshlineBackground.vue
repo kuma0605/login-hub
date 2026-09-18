@@ -154,3 +154,40 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* MeshlineBackground — all grid/scan/radar CSS self-contained */
+
+.grid-field {
+  background-image:
+    linear-gradient(to right, rgba(11, 92, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 92, 255, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.grid-field-lg {
+  background-image:
+    linear-gradient(to right, rgba(11, 92, 255, 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 92, 255, 0.13) 1px, transparent 1px);
+  background-size: 220px 220px;
+}
+.scan-line {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(11, 92, 255, 0) 0%,
+    rgba(11, 92, 255, 0.5) 50%,
+    rgba(11, 92, 255, 0) 100%
+  );
+}
+
+@keyframes scan-sweep {
+  0%   { transform: translateY(-12%); }
+  100% { transform: translateY(112%); }
+}
+@keyframes radar-pulse {
+  0%   { transform: translate(-50%, -50%) scale(0.45); opacity: 0.45; }
+  100% { transform: translate(-50%, -50%) scale(1.25); opacity: 0; }
+}
+
+.animate-scan-sweep  { animation: scan-sweep 11s linear infinite; }
+.animate-radar-pulse { animation: radar-pulse 6s linear infinite; }
+</style>
