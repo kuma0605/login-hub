@@ -6,6 +6,55 @@ interface Trace {
   length: string;
 }
 
+/** All keyframes and utility classes scoped to this component — no global index.css needed */
+const STYLES = `
+  .ss-mask-fade-edges {
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 25%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(120% 100% at 50% 25%, #000 40%, transparent 100%);
+  }
+  .ss-mask-clear-hero {
+    -webkit-mask-image: radial-gradient(34rem 30rem at 76% 30%, transparent 30%, #000 78%);
+    mask-image: radial-gradient(34rem 30rem at 76% 30%, transparent 30%, #000 78%);
+  }
+  @keyframes ss-bloom-breathe {
+    0%, 100% { transform: translate(-50%, 0) scale(0.92); opacity: 0.45; }
+    50%       { transform: translate(-50%, 2rem) scale(1.18); opacity: 1; }
+  }
+  @keyframes ss-bloom-breathe-alt {
+    0%, 100% { transform: translate(0, 0) scale(1.14); opacity: 0.35; }
+    50%       { transform: translate(-2rem, -1.5rem) scale(0.94); opacity: 0.9; }
+  }
+  @keyframes ss-trace-x {
+    0%        { transform: translateX(-40%); opacity: 0; }
+    8%        { opacity: 1; }
+    64%       { opacity: 1; }
+    80%, 100% { transform: translateX(150%); opacity: 0; }
+  }
+  @keyframes ss-trace-y {
+    0%        { transform: translateY(-50%); opacity: 0; }
+    8%        { opacity: 1; }
+    64%       { opacity: 1; }
+    80%, 100% { transform: translateY(160%); opacity: 0; }
+  }
+  @keyframes ss-sheen-sweep {
+    0%   { transform: translate3d(-65%, -25%, 0) rotate(12deg); opacity: 0; }
+    18%  { opacity: 1; }
+    70%  { opacity: 1; }
+    100% { transform: translate3d(65%, 25%, 0) rotate(12deg); opacity: 0; }
+  }
+  @keyframes ss-node-pulse {
+    0%, 100% { transform: scale(0.5); opacity: 0; }
+    35%      { transform: scale(1); opacity: 1; }
+    70%      { transform: scale(1.6); opacity: 0; }
+  }
+  .ss-animate-bloom     { animation: ss-bloom-breathe 6.5s ease-in-out infinite; }
+  .ss-animate-bloom-alt { animation: ss-bloom-breathe-alt 8s ease-in-out infinite; }
+  .ss-animate-trace-x   { animation: ss-trace-x 4.2s linear infinite; }
+  .ss-animate-trace-y   { animation: ss-trace-y 5s linear infinite; }
+  .ss-animate-sheen     { animation: ss-sheen-sweep 7s ease-in-out infinite; }
+  .ss-animate-node      { animation: ss-node-pulse 3.2s ease-in-out infinite; }
+`;
+
 const horizontalTraces: Trace[] = [
   { offset: '22%', delay: '0s', length: '20rem' },
   { offset: '58%', delay: '1.8s', length: '28rem' },
@@ -33,6 +82,7 @@ export interface SmartSecurityBackgroundProps {
  * SmartSecurityBackground:
  * Ambient smart security edge network backdrop with breathing violet/blue blooms,
  * signal streaks, flaring node points, and diagonal sheen sweeps.
+ * All animation CSS is self-contained — no dependency on global index.css.
  */
 export function SmartSecurityBackground({ className = '' }: SmartSecurityBackgroundProps) {
   return (
@@ -40,6 +90,9 @@ export function SmartSecurityBackground({ className = '' }: SmartSecurityBackgro
       aria-hidden="true"
       className={`pointer-events-none fixed inset-0 overflow-hidden select-none bg-[#eff2fb] ${className}`}
     >
+      {/* Scoped animation styles — injected once per mount */}
+      <style>{STYLES}</style>
+
       {/* Subtle coordinate grid layer */}
       <div
         className="absolute inset-0 opacity-60"
@@ -51,11 +104,11 @@ export function SmartSecurityBackground({ className = '' }: SmartSecurityBackgro
       />
 
       {/* Signal streaks + flaring node points */}
-      <div className="mask-fade-edges absolute inset-0">
+      <div className="ss-mask-fade-edges absolute inset-0">
         {horizontalTraces.map((trace) => (
           <span
             key={`h-${trace.offset}`}
-            className="animate-trace-x absolute left-0 h-[2px] rounded-full"
+            className="ss-animate-trace-x absolute left-0 h-[2px] rounded-full"
             style={{
               top: trace.offset,
               width: trace.length,
@@ -70,7 +123,7 @@ export function SmartSecurityBackground({ className = '' }: SmartSecurityBackgro
         {verticalTraces.map((trace) => (
           <span
             key={`v-${trace.offset}`}
-            className="animate-trace-y absolute top-0 w-[2px] rounded-full"
+            className="ss-animate-trace-y absolute top-0 w-[2px] rounded-full"
             style={{
               left: trace.offset,
               height: trace.length,
@@ -85,7 +138,7 @@ export function SmartSecurityBackground({ className = '' }: SmartSecurityBackgro
         {nodes.map((node) => (
           <span
             key={`${node.left}-${node.top}`}
-            className="animate-node absolute h-2 w-2 rounded-full bg-[#38bdf8]"
+            className="ss-animate-node absolute h-2 w-2 rounded-full bg-[#38bdf8]"
             style={{
               left: node.left,
               top: node.top,
@@ -97,9 +150,9 @@ export function SmartSecurityBackground({ className = '' }: SmartSecurityBackgro
       </div>
 
       {/* Diagonal sheen light sweep */}
-      <div className="mask-fade-edges absolute inset-0">
+      <div className="ss-mask-fade-edges absolute inset-0">
         <div
-          className="animate-sheen absolute -inset-y-1/2 left-[32%] w-[30rem] -translate-x-1/2"
+          className="ss-animate-sheen absolute -inset-y-1/2 left-[32%] w-[30rem] -translate-x-1/2"
           style={{
             background:
               'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(214,226,255,0.7) 45%, rgba(255,255,255,0.85) 55%, rgba(214,226,255,0) 100%)',
@@ -111,21 +164,21 @@ export function SmartSecurityBackground({ className = '' }: SmartSecurityBackgro
       {/* Ambient Breathing Blooms */}
       <div className="absolute inset-0">
         <div
-          className="animate-bloom absolute left-[28%] top-[-20rem] h-[42rem] w-[42rem] rounded-full"
+          className="ss-animate-bloom absolute left-[28%] top-[-20rem] h-[42rem] w-[42rem] rounded-full"
           style={{
             background:
               'radial-gradient(circle, rgba(178,193,255,0.8) 0%, rgba(178,193,255,0) 68%)'
           }}
         />
         <div
-          className="animate-bloom-alt absolute bottom-[-16rem] left-[-12rem] h-[32rem] w-[32rem] rounded-full"
+          className="ss-animate-bloom-alt absolute bottom-[-16rem] left-[-12rem] h-[32rem] w-[32rem] rounded-full"
           style={{
             background:
               'radial-gradient(circle, rgba(125,146,245,0.4) 0%, rgba(125,146,245,0) 70%)'
           }}
         />
         <div
-          className="animate-bloom-alt absolute bottom-[-18rem] right-[-10rem] h-[34rem] w-[34rem] rounded-full"
+          className="ss-animate-bloom-alt absolute bottom-[-18rem] right-[-10rem] h-[34rem] w-[34rem] rounded-full"
           style={{
             animationDelay: '3.5s',
             background:
